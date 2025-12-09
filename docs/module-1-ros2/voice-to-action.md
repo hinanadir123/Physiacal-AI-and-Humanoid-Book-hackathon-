@@ -71,7 +71,7 @@ Moving beyond rigid command structures, VLA aims for fluid, human-like interacti
 A significant challenge in Voice-to-Action is disambiguating commands based on context. "Move left" means different things if the robot is navigating vs. manipulating an object. Advanced NLU and state tracking are essential.
 :::
 
-<style>
+<style>{`
   .gradient-card-container {
     display: flex;
     flex-wrap: wrap;
@@ -116,4 +116,4 @@ A significant challenge in Voice-to-Action is disambiguating commands based on c
       width: 80%;
     }
   }
-</style>
+`}</style>

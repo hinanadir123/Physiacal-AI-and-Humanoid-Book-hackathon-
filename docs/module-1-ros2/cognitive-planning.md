@@ -85,7 +85,7 @@ Effective cognitive planning requires more than just an LLM. It needs:
 LLM-based planning can be computationally intensive and may suffer from latency issues for real-time control. Research focuses on optimizing model size, efficient prompting, and hybrid planning approaches.
 :::
 
-<style>
+<style>{`
   .gradient-card-container {
     display: flex;
     flex-wrap: wrap;
@@ -130,4 +130,4 @@ LLM-based planning can be computationally intensive and may suffer from latency 
       width: 80%;
     }
   }
-</style>
+`}</style>

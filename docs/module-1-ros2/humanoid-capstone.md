@@ -19,8 +19,7 @@ This capstone represents the pinnacle of current VLA research: a humanoid robot 
   </div>
   <div className="gradient-card">
     <h3>2️⃣ Cognitive Planning</h3>
-    <p>LLM-based planning module breaks down the command: `navigate(kitchen)`, `find(glass, water)`, `fill(glass, water)`, `navigate(human_location)`, `hand_over(glass)`.
-    </p>
+    <p>LLM-based planning module breaks down the command: `navigate(kitchen)`, `find(glass, water)`, `fill(glass, water)`, `navigate(human_location)`, `hand_over(glass)`.</p>
   </div>
   <div className="gradient-card">
     <h3>3️⃣ Autonomous Navigation</h3>
@@ -76,7 +75,7 @@ A truly autonomous humanoid must be able to continuously monitor its progress an
 Achieving truly robust autonomous humanoids requires breakthroughs in commonsense reasoning, real-world generalization, energy efficiency, and seamless human-robot collaboration in highly dynamic settings.
 :::
 
-<style>
+<style>{`
   .gradient-card-container {
     display: flex;
     flex-wrap: wrap;
@@ -121,4 +120,4 @@ Achieving truly robust autonomous humanoids requires breakthroughs in commonsens
       width: 80%;
     }
   }
-</style>
+`}</style>

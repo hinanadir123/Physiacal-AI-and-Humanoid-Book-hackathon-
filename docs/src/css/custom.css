@@ -1,0 +1,44 @@
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+/* You can override the default Infima variables here. */
+:root {
+  --ifm-color-primary: #8A2BE2; /* Dark Purple */
+  --ifm-color-primary-dark: #7B1FA2;
+  --ifm-color-primary-darker: #6A1B9A;
+  --ifm-color-primary-darkest: #4A148C;
+  --ifm-color-primary-light: #9C4DCC;
+  --ifm-color-primary-lighter: #AB69D6;
+  --ifm-color-primary-lightest: #BB86FC;
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme='dark'] {
+  --ifm-color-primary: #BB86FC;
+  --ifm-color-primary-dark: #AB69D6;
+  --ifm-color-primary-darker: #9C4DCC;
+  --ifm-color-primary-darkest: #8A2BE2;
+  --ifm-color-primary-light: #D0A3FF;
+  --ifm-color-primary-lighter: #E1C1FF;
+  --ifm-color-primary-lightest: #F2E0FF;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
+
+.hero--primary {
+  background: linear-gradient(45deg, #8A2BE2, #BB86FC);
+  color: white;
+}
+
+.button--secondary {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease-in-out;
+}
+
+.button--secondary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}

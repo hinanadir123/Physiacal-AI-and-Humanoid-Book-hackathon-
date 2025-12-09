@@ -61,7 +61,7 @@ VLA is not just about connecting existing modules; it's about the emergent intel
 While promising, VLA research faces challenges in data efficiency, real-time processing, ethical considerations, and robust generalization across diverse tasks and environments.
 :::
 
-<style>
+<style>{`
   .gradient-card-container {
     display: flex;
     flex-wrap: wrap;
@@ -106,4 +106,4 @@ While promising, VLA research faces challenges in data efficiency, real-time pro
       width: 80%;
     }
   }
-</style>
+`}</style>
