@@ -4,41 +4,361 @@
  * work well for content-centric websites.
  */
 
-/* You can override the default Infima variables here. */
+/* Technical Theme Colors */
 :root {
-  --ifm-color-primary: #8A2BE2; /* Dark Purple */
-  --ifm-color-primary-dark: #7B1FA2;
-  --ifm-color-primary-darker: #6A1B9A;
-  --ifm-color-primary-darkest: #4A148C;
-  --ifm-color-primary-light: #9C4DCC;
-  --ifm-color-primary-lighter: #AB69D6;
-  --ifm-color-primary-lightest: #BB86FC;
+  --ifm-color-primary: #00d4ff; /* Electric Blue */
+  --ifm-color-primary-dark: #00c0e6;
+  --ifm-color-primary-darker: #00adb9;
+  --ifm-color-primary-darkest: #008ca0;
+  --ifm-color-primary-light: #1adfff;
+  --ifm-color-primary-lighter: #33e6ff;
+  --ifm-color-primary-lightest: #ccf7ff;
+  --ifm-color-secondary: #00ff9d; /* Electric Green */
+  --ifm-color-tertiary: #ff00c8; /* Electric Pink */
   --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --docusaurus-highlighted-code-line-bg: rgba(0, 212, 255, 0.15);
+  --ifm-background-color: #0a0a12; /* Deep Space */
+  --ifm-background-surface-color: rgba(10, 10, 18, 0.8); /* Semi-transparent dark */
+  --ifm-navbar-background-color: rgba(10, 10, 18, 0.95);
+  --ifm-footer-background-color: rgba(10, 10, 18, 0.95);
+  --ifm-card-background-color: rgba(20, 20, 35, 0.7);
+  --ifm-card-border-color: rgba(0, 212, 255, 0.2);
+  --ifm-menu-color: #e0e0ff;
+  --ifm-menu-color-active: var(--ifm-color-primary);
+  --ifm-menu-link-sublist-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23e0e0ff'%3E%3Cpath d='M12.95 7.5L8.4 2.95 7.025 4.325 10.6 7.9l-3.575 3.575L8.4 12.85z'/%3E%3C/svg%3E");
 }
 
 [data-theme='dark'] {
-  --ifm-color-primary: #BB86FC;
-  --ifm-color-primary-dark: #AB69D6;
-  --ifm-color-primary-darker: #9C4DCC;
-  --ifm-color-primary-darkest: #8A2BE2;
-  --ifm-color-primary-light: #D0A3FF;
-  --ifm-color-primary-lighter: #E1C1FF;
-  --ifm-color-primary-lightest: #F2E0FF;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  --ifm-color-primary: #00d4ff;
+  --ifm-color-primary-dark: #00c0e6;
+  --ifm-color-primary-darker: #00adb9;
+  --ifm-color-primary-darkest: #008ca0;
+  --ifm-color-primary-light: #1adfff;
+  --ifm-color-primary-lighter: #33e6ff;
+  --ifm-color-primary-lightest: #ccf7ff;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 212, 255, 0.15);
+  --ifm-background-color: #0a0a12;
+  --ifm-background-surface-color: rgba(10, 10, 18, 0.8);
+  --ifm-navbar-background-color: rgba(10, 10, 18, 0.95);
+  --ifm-footer-background-color: rgba(10, 10, 18, 0.95);
+  --ifm-card-background-color: rgba(20, 20, 35, 0.7);
+  --ifm-card-border-color: rgba(0, 212, 255, 0.2);
+  --ifm-menu-color: #e0e0ff;
+  --ifm-menu-color-active: var(--ifm-color-primary);
 }
 
+/* Global Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Background Effects */
+body {
+  background: linear-gradient(45deg, #0a0a12 0%, #0f0f1a 25%, #0a0a12 50%, #0f0f1a 75%, #0a0a12 100%);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Add grid pattern overlay */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    linear-gradient(rgba(0, 212, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 212, 255, 0.05) 1px, transparent 1px);
+  background-size: 50px 50px;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Technical themed navbar */
+.navbar {
+  backdrop-filter: blur(10px);
+  background: var(--ifm-navbar-background-color) !important;
+  border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+  box-shadow: 0 2px 20px rgba(0, 212, 255, 0.1);
+}
+
+.navbar__title {
+  color: var(--ifm-color-primary);
+  text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+  font-weight: 600;
+}
+
+.navbar__link {
+  color: #e0e0ff;
+  transition: all 0.3s ease;
+}
+
+.navbar__link:hover {
+  color: var(--ifm-color-primary);
+  text-shadow: 0 0 8px rgba(0, 212, 255, 0.8);
+}
+
+/* Ensure text is visible on all backgrounds */
+.markdown a {
+  color: var(--ifm-color-primary);
+}
+
+.markdown a:hover {
+  color: var(--ifm-color-secondary);
+}
+
+.markdown h1, .markdown h2, .markdown h3, .markdown h4, .markdown h5, .markdown h6 {
+  color: #e0e0ff;
+}
+
+.markdown p, .markdown li, .markdown td, .markdown th {
+  color: #e0e0ff;
+}
+
+/* Ensure code text is visible */
+.prism-code {
+  color: #f8f8f2 !important;
+}
+
+/* Ensure text in cards is visible */
+.card {
+  color: #e0e0ff;
+}
+
+/* Ensure text in sidebar is visible */
+.menu__list-item-collapsible .menu__link,
+.menu__list-item-collapsible .menu__caret {
+  color: var(--ifm-menu-color) !important;
+}
+
+/* Technical themed hero section */
 .hero--primary {
-  background: linear-gradient(45deg, #8A2BE2, #BB86FC);
+  background: linear-gradient(135deg, #0a0a12 0%, #0f0f1a 50%, #1a1a2a 100%);
   color: white;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+}
+
+.hero--primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 10% 20%, rgba(0, 212, 255, 0.1) 0%, transparent 40%),
+              radial-gradient(circle at 90% 80%, rgba(255, 0, 200, 0.1) 0%, transparent 40%);
+  z-index: 0;
+}
+
+.hero__title {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+  background: linear-gradient(45deg, var(--ifm-color-primary), var(--ifm-color-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+  animation: pulse 3s ease-in-out infinite;
+}
+
+.hero__subtitle {
+  font-size: 1.5rem;
+  color: #e0e0ff;
+  text-shadow: 0 0 10px rgba(224, 224, 255, 0.3);
+  margin-bottom: 2rem;
+}
+
+/* Animated buttons */
+.button {
+  border: 2px solid var(--ifm-color-primary);
+  background: rgba(0, 212, 255, 0.1);
+  color: var(--ifm-color-primary);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  font-weight: 600;
+}
+
+.button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.button:hover::before {
+  left: 100%;
+}
+
+.button:hover {
+  background: rgba(0, 212, 255, 0.2);
+  color: white;
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
+  transform: translateY(-2px);
+  border-color: var(--ifm-color-secondary);
 }
 
 .button--secondary {
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: all 0.2s ease-in-out;
+  box-shadow: 0 4px 15px rgba(0, 212, 255, 0.2);
+  animation: float 3s ease-in-out infinite;
 }
 
-.button--secondary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+/* Cards and content areas */
+.card {
+  background: var(--ifm-card-background-color);
+  border: 1px solid var(--ifm-card-border-color);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(0, 212, 255, 0.3);
+  border-color: rgba(0, 212, 255, 0.4);
+}
+
+/* Sidebar navigation */
+.menu {
+  background: var(--ifm-background-surface-color);
+  backdrop-filter: blur(10px);
+  border-right: 1px solid rgba(0, 212, 255, 0.2);
+}
+
+.menu__link {
+  color: var(--ifm-menu-color);
+  transition: all 0.3s ease;
+  border-radius: 4px;
+  margin: 2px 8px;
+}
+
+.menu__link:hover {
+  color: var(--ifm-menu-color-active);
+  background: rgba(0, 212, 255, 0.1);
+  text-shadow: 0 0 8px rgba(0, 212, 255, 0.5);
+}
+
+.menu__link--active {
+  color: var(--ifm-menu-color-active);
+  background: rgba(0, 212, 255, 0.15);
+  border-left: 3px solid var(--ifm-color-primary);
+  text-shadow: 0 0 8px rgba(0, 212, 255, 0.5);
+}
+
+/* Code blocks */
+.prism-code {
+  background: rgba(10, 10, 20, 0.8) !important;
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  backdrop-filter: blur(5px);
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+/* Footer */
+.footer {
+  background: var(--ifm-footer-background-color);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(0, 212, 255, 0.2);
+  margin-top: 3rem;
+}
+
+/* Animations for content */
+article {
+  animation: slideInUp 0.6s ease-out;
+}
+
+/* Technical grid elements */
+.grid--technical {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+.grid--technical .card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Hover effects for content */
+.markdown h1,
+.markdown h2,
+.markdown h3,
+.markdown h4,
+.markdown h5,
+.markdown h6 {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.markdown h1:hover,
+.markdown h2:hover,
+.markdown h3:hover {
+  text-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
+}
+
+/* Technical border effects */
+.theme-doc-markdown {
+  background: var(--ifm-background-surface-color);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 2rem;
+  margin: 1rem 0;
+  border: 1px solid rgba(0, 212, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .hero__title {
+    font-size: 2.5rem;
+  }
+
+  .hero__subtitle {
+    font-size: 1.2rem;
+  }
+
+  .button--secondary {
+    animation: none;
+  }
 }

@@ -15,7 +15,7 @@ const config: Config = {
   },
 
   // Set the production url of your site here
-  url: 'https://your-docusaurus-site.example.com',
+  url: 'https://physiacal-ai-and-humanoid-book-hack.vercel.app/',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
@@ -35,6 +35,9 @@ const config: Config = {
     locales: ['en'],
   },
 
+  themes: [
+    // ... other themes
+  ],
   presets: [
     [
       'classic',

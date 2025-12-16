@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Frontend-Backend Integration Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .container { max-width: 800px; margin: 0 auto; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }
+        .status { padding: 10px; margin: 10px 0; border-radius: 3px; }
+        .success { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .error { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        .message { margin: 10px 0; padding: 10px; background-color: #f8f9fa; border-left: 4px solid #007bff; }
+        input, button { padding: 8px; margin: 5px; }
+        #response { white-space: pre-wrap; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Frontend-Backend Integration Test</h1>
+
+        <div class="test-section">
+            <h2>System Status</h2>
+            <div id="status-checks"></div>
+        </div>
+
+        <div class="test-section">
+            <h2>Chat Interface Test</h2>
+            <input type="text" id="queryInput" placeholder="Enter your question..." style="width: 60%;" value="What is ROS 2?">
+            <button onclick="sendQuery()">Send Query</button>
+            <div id="response" style="margin-top: 15px; min-height: 100px;"></div>
+        </div>
+
+        <div class="test-section">
+            <h2>API Endpoint Tests</h2>
+            <button onclick="testHealth()">Test Health</button>
+            <button onclick="testCollections()">Test Collections</button>
+            <div id="api-results"></div>
+        </div>
+    </div>
+
+    <script>
+        // Test backend connectivity with CORS
+        async function checkBackend() {
+            try {
+                const response = await fetch('http://localhost:8000/health');
+                const data = await response.json();
+                return { success: true, data };
+            } catch (error) {
+                return { success: false, error: error.message };
+            }
+        }
+
+        // Test frontend availability
+        async function checkFrontend() {
+            try {
+                const response = await fetch('http://localhost:3000');
+                return { success: response.status === 200 };
+            } catch (error) {
+                return { success: false, error: error.message };
+            }
+        }
+
+        // Send a query to the backend
+        async function sendQuery() {
+            const query = document.getElementById('queryInput').value;
+            const responseDiv = document.getElementById('response');
+
+            if (!query.trim()) {
+                responseDiv.textContent = 'Please enter a query';
+                return;
+            }
+
+            responseDiv.textContent = 'Sending query...';
+
+            try {
+                const response = await fetch('http://localhost:8000/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        query: query,
+                        llm: 'claude'
+                    })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    responseDiv.innerHTML = `<strong>Query:</strong> ${data.query}<br>
+                                           <strong>Response:</strong><br>${data.response.replace(/\n/g, '<br>')}`;
+                } else {
+                    responseDiv.textContent = `Error: ${data.error || 'Unknown error'}`;
+                }
+            } catch (error) {
+                responseDiv.textContent = `Error: ${error.message}`;
+            }
+        }
+
+        // Test health endpoint
+        async function testHealth() {
+            try {
+                const response = await fetch('http://localhost:8000/health');
+                const data = await response.json();
+                document.getElementById('api-results').innerHTML =
+                    `<div class="message"><strong>Health Check:</strong> ${JSON.stringify(data, null, 2)}</div>`;
+            } catch (error) {
+                document.getElementById('api-results').textContent = `Health test failed: ${error.message}`;
+            }
+        }
+
+        // Test collections endpoint
+        async function testCollections() {
+            try {
+                const response = await fetch('http://localhost:8000/collections');
+                const data = await response.json();
+                document.getElementById('api-results').innerHTML =
+                    `<div class="message"><strong>Collections:</strong> ${JSON.stringify(data, null, 2)}</div>`;
+            } catch (error) {
+                document.getElementById('api-results').textContent = `Collections test failed: ${error.message}`;
+            }
+        }
+
+        // Run initial status checks
+        async function runStatusChecks() {
+            const statusDiv = document.getElementById('status-checks');
+
+            statusDiv.innerHTML = '<div class="status">Checking backend availability...</div>';
+
+            const backendCheck = await checkBackend();
+            if (backendCheck.success) {
+                statusDiv.innerHTML += `<div class="status success">✅ Backend: ${backendCheck.data.message} (${backendCheck.data.status})</div>`;
+            } else {
+                statusDiv.innerHTML += `<div class="status error">❌ Backend: ${backendCheck.error}</div>`;
+            }
+
+            statusDiv.innerHTML += '<div class="status">Checking frontend availability...</div>';
+
+            const frontendCheck = await checkFrontend();
+            if (frontendCheck.success) {
+                statusDiv.innerHTML += `<div class="status success">✅ Frontend: Available (status 200)</div>`;
+            } else {
+                statusDiv.innerHTML += `<div class="status error">❌ Frontend: ${frontendCheck.error || 'Not available'}</div>`;
+            }
+
+            statusDiv.innerHTML += `<div class="status">🎯 Expected API endpoints: http://localhost:8000/chat, http://localhost:8000/collections</div>`;
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', runStatusChecks);
+    </script>
+</body>
+</html>

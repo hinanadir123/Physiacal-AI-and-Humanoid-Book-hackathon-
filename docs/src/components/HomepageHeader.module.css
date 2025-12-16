@@ -3,21 +3,53 @@
   text-align: center;
   position: relative;
   overflow: hidden;
+  background: linear-gradient(135deg, #0a0a12 0%, #0f0f1a 50%, #1a1a2a 100%);
+  border-bottom: 1px solid rgba(0, 212, 255, 0.2);
 }
 
 .heroImages {
   display: flex;
   justify-content: center;
-  gap: 1rem;
+  gap: 2rem;
   margin-top: 2rem;
+  flex-wrap: wrap;
 }
 
 .heroImage {
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease-in-out;
+  height: 80px;
+  width: 80px;
+  border-radius: 12px;
+  filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.5));
+  transition: all 0.3s ease;
+  border: 1px solid rgba(0, 212, 255, 0.3);
+  background: rgba(0, 212, 255, 0.1);
 }
 
 .heroImage:hover {
-  transform: scale(1.05);
+  transform: scale(1.2) rotate(10deg);
+  filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.8));
+  background: rgba(0, 212, 255, 0.2);
+}
+
+@media screen and (max-width: 996px) {
+  .heroBanner {
+    padding: 2rem;
+  }
+
+  .heroImages {
+    gap: 1rem;
+  }
+
+  .heroImage {
+    height: 60px;
+    width: 60px;
+  }
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
 }
