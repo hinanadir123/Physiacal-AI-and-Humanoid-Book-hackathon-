@@ -46,7 +46,7 @@ function Find-RepositoryRoot {
     $current = Resolve-Path $StartDir
     while ($true) {
         foreach ($marker in $Markers) {
-            if (Test-Path (Join-Path $current $marker)) {
+            if (Test-Path ([System.IO.Path]::Combine($current, $marker))) {
                 return $current
             }
         }
@@ -147,7 +147,7 @@ try {
 
 Set-Location $repoRoot
 
-$specsDir = Join-Path $repoRoot 'specs'
+$specsDir = [System.IO.Path]::Combine($repoRoot, 'specs')
 New-Item -ItemType Directory -Path $specsDir -Force | Out-Null
 
 # Function to generate branch name with stop word filtering and length filtering

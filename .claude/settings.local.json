@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find . -name \"*.py\" -type f -exec grep -l \"claude\\|gemini\\|chat\\|query\\|search\" {} ;)"
+    ]
+  }
+}

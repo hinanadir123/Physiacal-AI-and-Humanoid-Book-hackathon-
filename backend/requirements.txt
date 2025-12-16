@@ -1,0 +1,10 @@
+requests
+beautifulsoup4
+python-dotenv
+cohere
+qdrant-client
+tiktoken
+lxml
+flask
+anthropic
+google-generativeai
