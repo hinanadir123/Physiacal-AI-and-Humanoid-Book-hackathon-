@@ -92,6 +92,8 @@ const config: Config = {
           position: 'left',
           label: 'Tutorial',
         },
+        {to: '/auth/signup', label: 'Sign Up', position: 'right'},
+        {to: '/auth/signin', label: 'Sign In', position: 'right'},
         {to: '/blog', label: 'Blog', position: 'left'},
         {
           href: 'https://github.com/facebook/docusaurus',
